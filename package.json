@@ -1,0 +1,22 @@
+{
+  "name": "vulcain-motors-controller",
+  "version": "1.0.0",
+  "description": "This repository is an honnest api who permit to transform any raspberry into a cnc controller. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wanderer-Guy/Vulcain-Motors-Controller.git"
+  },
+  "author": "WandererGuy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Wanderer-Guy/Vulcain-Motors-Controller/issues"
+  },
+  "homepage": "https://github.com/Wanderer-Guy/Vulcain-Motors-Controller#readme",
+  "dependencies": {
+    "motor-hat": "^2.0.10"
+  }
+}
