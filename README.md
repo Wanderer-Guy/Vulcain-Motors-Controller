@@ -33,19 +33,22 @@ Now, you should download the version that corresponding to your architecture.
 For that, find the good version on the [nodejs website](https://nodejs.org/en/download/).
 
 On this website, you have all latest versions for all different achitectures, choose the good one and download it on the raspberry.
-For that, type something like this : 
+For that, type something like this :
+
 ```
 wget link
 ```
 
 For example, for the raspberry pi 3, we type this :
+
 ```
 wget https://nodejs.org/dist/v16.14.0/node-v16.14.0-linux-armv7l.tar.xz
 ```
 
 Great ! Node archive is downloaded. You should uncompress it. For that, use the commande `tar -xf archive.tar.gz`.
 
-And the last command is to copy the archive content into Raspbian. That you should just type this : 
+And the last command is to copy the archive content into Raspbian. That you should just type this :
+
 ```
 cd archive
 sudo cp -R * /usr/local/
@@ -55,8 +58,29 @@ Now, if you type `node -v` and `npm -v`, you have the latest version of node and
 
 **NOTICE :** This part of tutorial is based on [this existing tutorial](https://www.makersupplies.sg/blogs/tutorials/how-to-install-node-js-and-npm-on-the-raspberry-pi) who are very understandable.
 
-
-
 ### Enable I2C and increase baudrate
+
+Know the objective is to enable the I2C to permit communication between the Raspberry and the motor shield.
+For that, on the terminal you should type :
+
+```
+sudo raspi-config
+```
+
+An interface appear, and you can choose `"3 Interface Options" > "P5 I2C"` and enable it.
+
+Great, you can reboot your Raspberry to take this new configuration in account.
+
+Now we should increase the baudrate. We do this to have more informations sendable to the adafruit card.
+For that, type :
+
+```
+sudo nano /boot/config.txt
+```
+
+Find the line where there is this written : `dtparam=i2c_arm=on`, and replace it by : `dtparam=i2c_arm=on,i2c_arm_baudrate=400000`.
+
+Save the file and reboot your Raspberry.
+It is finish for I2C.
 
 ## Wiring the shield

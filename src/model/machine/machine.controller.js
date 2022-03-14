@@ -1,6 +1,6 @@
 const MotorHat = require("motor-hat");
 
-class Motorization {
+class Machine {
   constructor(options) {
     this.motors = MotorHat(options);
     this.initialize();
@@ -43,4 +43,4 @@ class Motorization {
   }
 }
 
-module.exports = { Motorization };
+module.exports = { Machine };
