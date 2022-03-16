@@ -12,6 +12,7 @@ class Machine {
       ySize,
     };
     this.motors = MotorHat(options);
+    this.motors.init();
     this.xMotor = this.motors.steppers[0];
     this.yMotor = this.motors.steppers[1];
     this.config = new Save("machine-config", defaultConfig);
@@ -20,7 +21,6 @@ class Machine {
   }
 
   initialize() {
-    this.motors.init();
     this.motors.steppers[0].setMicrosteps(16);
     this.motors.steppers[1].setMicrosteps(16);
     this.motors.steppers[0].setCurrent(0.75);
@@ -31,18 +31,20 @@ class Machine {
     let configData = this.config.getSave();
 
     while (configData["position"].x !== configData["origin"].x) {
+      console.log("Position X: ", configData["position"].x);
+      console.log("Origin X: ", configData["origin"].x);
       this.xSpeed("high");
       const direction =
-        configData["origin"].x - configData["position"].x > 0 ? "back" : "fwd";
+        configData["position"].x - configData["origin"].x > 0 ? "back" : "fwd";
       this.xMotor.oneStepSync(direction);
       configData["position"].x += directionTable[direction];
       configData = this.config.setData("position", configData["position"]);
     }
 
-    while (configData["position"].y !== configData["origin"].y) {
+    while (configData["origin"].y !== configData["position"].y) {
       this.ySpeed("high");
       const direction =
-        configData["origin"].y - configData["position"].y > 0 ? "back" : "fwd";
+        configData["position"].y - configData["origin"].y > 0 ? "back" : "fwd";
       this.yMotor.oneStepSync(direction);
       configData["position"].y += directionTable[direction];
       configData = this.config.setData("position", configData["position"]);
