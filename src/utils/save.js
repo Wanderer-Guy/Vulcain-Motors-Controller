@@ -1,33 +1,32 @@
 const fs = require("fs");
 
 class Save {
-  constructor(name) {
+  constructor(name, template = {}) {
     this.name = name;
     this.path = `./src/resources/${name}.json`;
+    if (!fs.existsSync(this.path)) {
+      fs.appendFileSync(this.path, JSON.stringify(template), {
+        encoding: "utf8",
+      });
+      this.data = template;
+    } else {
+      this.data = JSON.parse(
+        fs.readFileSync(this.path, {
+          encoding: "utf8",
+          flag: "r",
+        })
+      );
+    }
   }
 
   getSave() {
-    if (!fs.existsSync(this.path)) {
-      return false;
-    }
-
-    const data = fs.readFileSync(this.path, {
-      encoding: "utf8",
-      flag: "r",
-    });
-
-    return JSON.parse(data);
+    return this.data;
   }
 
-  initialize(template = {}) {
-    if (fs.existsSync(this.path)) {
-      return false;
-    }
-
-    fs.appendFileSync(this.path, JSON.stringify(template), {
-      encoding: "utf8",
-    });
-    return true;
+  setData(key, value) {
+    this.data[key] = value;
+    fs.writeFileSync(this.path, JSON.stringify(this.data));
+    return this.data;
   }
 }
 
