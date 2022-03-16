@@ -13,6 +13,7 @@ class Machine {
     };
     this.motors = MotorHat(options);
     this.motors.init();
+    this.speed = { x: "slow", y: "slow" };
     this.xMotor = this.motors.steppers[0];
     this.yMotor = this.motors.steppers[1];
     this.config = new Save("machine-config", defaultConfig);
@@ -27,69 +28,68 @@ class Machine {
     this.motors.steppers[1].setCurrent(0.75);
   }
 
-  moveToOrigin() {
+  moveTo(position) {
     let configData = this.config.getSave();
 
-    while (configData["position"].x !== configData["origin"].x) {
-      console.log("Position X: ", configData["position"].x);
-      console.log("Origin X: ", configData["origin"].x);
-      this.xSpeed("high");
+    while (configData["position"].x !== position.x) {
       const direction =
-        configData["position"].x - configData["origin"].x > 0 ? "back" : "fwd";
+        configData["position"].x - position.x > 0 ? "back" : "fwd";
       this.xMotor.oneStepSync(direction);
       configData["position"].x += directionTable[direction];
       configData = this.config.setData("position", configData["position"]);
     }
 
-    while (configData["origin"].y !== configData["position"].y) {
-      this.ySpeed("high");
+    while (configData["position"].y !== position.y) {
       const direction =
-        configData["position"].y - configData["origin"].y > 0 ? "back" : "fwd";
+        configData["position"].y - position.y > 0 ? "back" : "fwd";
       this.yMotor.oneStepSync(direction);
       configData["position"].y += directionTable[direction];
       configData = this.config.setData("position", configData["position"]);
     }
+  }
 
-    this.xSpeed("low");
-    this.ySpeed("low");
+  moveToOrigin() {
+    const configData = this.config.getSave();
+
+    this.moveToQuickly(configData.origin);
+
     this.releaseAll();
   }
 
+  moveToQuickly(position) {
+    this.xSpeed("high");
+    this.ySpeed("high");
+    this.moveTo(position);
+  }
+
+  moveToSlowly(position) {
+    this.xSpeed("slow");
+    this.ySpeed("slow");
+    this.moveTo(position);
+  }
+
   xSpeed(speed) {
-    if (speed === "high") {
-      this.xMotor.setStyle("interleaved");
-      this.xMotor.setSpeed({ rpm: 10 });
-    } else {
-      this.xMotor.setStyle("microstep");
-      this.xMotor.setSpeed({ rpm: 1 });
+    if (speed != this.speed.x) {
+      if (speed === "high") {
+        this.xMotor.setStyle("interleaved");
+        this.xMotor.setSpeed({ rpm: 10 });
+      } else {
+        this.xMotor.setStyle("microstep");
+        this.xMotor.setSpeed({ rpm: 1 });
+      }
     }
   }
 
   ySpeed(speed) {
-    if (speed === "high") {
-      this.yMotor.setStyle("interleaved");
-      this.yMotor.setSpeed({ rpm: 10 });
-    } else {
-      this.yMotor.setStyle("microstep");
-      this.yMotor.setSpeed({ rpm: 1 });
+    if (speed != this.speed.y) {
+      if (speed === "high") {
+        this.yMotor.setStyle("interleaved");
+        this.yMotor.setSpeed({ rpm: 10 });
+      } else {
+        this.yMotor.setStyle("microstep");
+        this.yMotor.setSpeed({ rpm: 1 });
+      }
     }
-  }
-
-  forwardQuick() {
-    this.motors.steppers[0].setSpeed({ rpm: 10 });
-    this.motors.steppers[0].setStyle("interleaved"); // Microstep ou interleaved
-    this.motors.steppers[0].step("fwd", 2000, (err, res) => {
-      console.log(`C'est fini : 0`);
-      this.release(0);
-    });
-  }
-  forwardSlow() {
-    this.motors.steppers[1].setSpeed({ rpm: 1 });
-    this.motors.steppers[1].setStyle("microstep"); // Microstep ou interleaved
-    this.motors.steppers[1].step("fwd", 2000, (err, res) => {
-      console.log(`C'est fini : 1`);
-      this.release(1);
-    });
   }
 
   backward() {
