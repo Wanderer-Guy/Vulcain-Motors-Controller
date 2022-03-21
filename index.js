@@ -1,4 +1,4 @@
-const { Machine } = require("./src/model/machine/machine.controller");
+const { Machine } = require("./src/model/machine/engine.controller");
 
 const motorization = new Machine(
   {

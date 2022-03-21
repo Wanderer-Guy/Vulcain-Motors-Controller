@@ -3,7 +3,7 @@ const { Save } = require("../../utils/save");
 
 const directionTable = { back: -1, fwd: 1 };
 
-class Machine {
+class Engine {
   constructor(options, xSize, ySize) {
     const defaultConfig = {
       origin: { x: 0, y: 0, z: 0 },
@@ -103,4 +103,4 @@ class Machine {
   }
 }
 
-module.exports = { Machine };
+module.exports = { Engine };
