@@ -4,7 +4,8 @@
   "description": "This repository is an honnest api who permit to transform any raspberry into a cnc controller. ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc --outDir dist && node dist/index.js",
+    "start-local": "tsc --outDir dist && node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,12 @@
   "homepage": "https://github.com/Wanderer-Guy/Vulcain-Motors-Controller#readme",
   "dependencies": {
     "motor-hat": "^2.0.10"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "eslint": "^8.11.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
   }
 }
