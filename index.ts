@@ -1,4 +1,4 @@
-const Engine = require('./src/model/machine/engine.controller');
+/*const Engine = require('./src/model/machine/engine.controller');
 
 const motorization = new Engine(
   {
@@ -11,6 +11,7 @@ const motorization = new Engine(
   1000,
   1000
 );
+
 
 const values = [
   { x: 1, y: 0 },
@@ -51,3 +52,25 @@ for (const iterator of values) {
 }
 
 motorization.releaseAll();
+*/
+
+
+const Print = require("./src/model/machine/print");
+
+const gcodeString = "G0 G49 G40  G17 G80 G50 G90\n" + 
+                    "M6 T0(TOOL DIA.0.75)\n" + 
+                    "G64\n" +
+                    "G20 (Inch)\n" +
+                    "M04 S0\n" +
+                    "G00 G43 H0  Z0.1\n" +
+                    "X0 Y0\n" +
+                    "G01 Z-0.25 F1\n" +
+                    "G2 Y0 X0.15 R0.075 F30\n" +
+                    "X1.125 Y0 R1.125\n" +
+                    "Y-0.375 X0.75 R0.37\n" +
+                    "M5 M9\n" +
+                    "M30\n"
+
+const testPrint = new Print(gcodeString);
+
+testPrint.startPrint();
