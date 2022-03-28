@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc --outDir dist && node dist/index.js",
-    "start-local": "tsc --outDir dist && node dist/index.js"
+    "start-local": "tsc --outDir dist && node dist/index.js local"
   },
   "repository": {
     "type": "git",

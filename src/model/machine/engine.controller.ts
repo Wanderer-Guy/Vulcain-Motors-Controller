@@ -1,4 +1,6 @@
-const MotorHat = false ? require('motor-hat') : require('./MotorHatMock');
+const [executor, file, state] = process.argv;
+
+const MotorHat = state !== 'local' ? require('motor-hat') : require('./MotorHatMock');
 const Save = require('../../utils/save');
 
 const directionTable = { back: -1, fwd: 1 };
@@ -17,7 +19,7 @@ module.exports = class Engine {
       xSize,
       ySize,
     };
-    console.log('MotorHat', MotorHat);
+
     this.motors = MotorHat(options);
     this.motors.init();
     this.speed = { x: 'slow', y: 'slow' };

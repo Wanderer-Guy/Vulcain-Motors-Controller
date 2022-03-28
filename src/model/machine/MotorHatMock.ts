@@ -17,23 +17,29 @@ class Motor {
     this.options = options;
   }
 
-  setMicrosteps() {
+  setMicrosteps(args: any) {
+    console.log('setMicrosteps arguments ->', args);
     void 0;
   }
 
-  setCurrent() {
+  setCurrent(args: any) {
+    console.log('setCurrent arguments ->', args);
     void 0;
   }
-  setStyle() {
+  setStyle(args: any) {
+    console.log('setStyle arguments ->', args);
     void 0;
   }
-  setSpeed() {
+  setSpeed(args: any) {
+    console.log('setSpeed arguments ->', args);
     void 0;
   }
-  releaseSync() {
+  releaseSync(args: any) {
+    console.log('releaseSync arguments ->', args);
     void 0;
   }
-  oneStepSync() {
+  oneStepSync(args: any) {
+    console.log('oneStepSync arguments ->', args);
     void 0;
   }
 }
