@@ -54,8 +54,8 @@ for (const iterator of values) {
 motorization.releaseAll();
 */
 
+import Print from "./src/model/machine/print";
 
-const Print = require("./src/model/machine/print");
 
 const gcodeString = "G0 G49 G40  G17 G80 G50 G90\n" + 
                     "M6 T0(TOOL DIA.0.75)\n" + 

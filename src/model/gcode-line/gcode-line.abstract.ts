@@ -1,4 +1,4 @@
-module.exports = class GCodeLine {
+class GCodeLine {
 
   constructor() {
     
@@ -8,3 +8,5 @@ module.exports = class GCodeLine {
     throw new Error('You must implement this function');
   }
 };
+
+export default GCodeLine;

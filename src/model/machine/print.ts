@@ -1,6 +1,6 @@
-const Circle = require("../gcode-line/gcode-type/circle");
+import Circle from "../gcode-line/gcode-type/circle";
 
-module.exports = class Print {
+ class Print {
   gcode: string[]; 
   index: number = 0;
   latestCommand: string = "";
@@ -43,7 +43,6 @@ module.exports = class Print {
     return line;
   }
 
- 
-
-
 }
+
+export default Print;

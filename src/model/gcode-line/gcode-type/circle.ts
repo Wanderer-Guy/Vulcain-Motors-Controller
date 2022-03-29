@@ -1,6 +1,6 @@
-const GCodeLine = require("../gcode-line.abstract");
+import GCodeLine from "../gcode-line.abstract";
 
-module.exports = class Circle extends GCodeLine {
+class Circle extends GCodeLine {
 
   constructor(command: string[]) {
     super();
@@ -11,3 +11,5 @@ module.exports = class Circle extends GCodeLine {
     console.log("Circle")
   }
 };
+
+export default Circle;

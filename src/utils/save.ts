@@ -7,8 +7,7 @@ const DEFAULT_DATA: Data = {
   xSize: 0,
   ySize: 0,
 };
-
-module.exports = class Save implements SaveInterface {
+class Save implements SaveInterface {
   name: string;
   path: string;
   data: Data;
@@ -45,3 +44,5 @@ module.exports = class Save implements SaveInterface {
     return this.data;
   }
 };
+
+export default Save;

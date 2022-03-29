@@ -1,11 +1,12 @@
 const [executor, file, state] = process.argv;
 
 const MotorHat = state !== 'local' ? require('motor-hat') : require('./MotorHatMock');
-const Save = require('../../utils/save');
+
+import Save from "../../utils/save";
 
 const directionTable = { back: -1, fwd: 1 };
 
-module.exports = class Engine {
+class Engine {
   motors: any;
   speed: { x: string; y: string };
   xMotor: any;
@@ -107,3 +108,5 @@ module.exports = class Engine {
     this.yMotor.releaseSync();
   }
 };
+
+export default Engine;

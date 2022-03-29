@@ -1,4 +1,6 @@
-module.exports = class Line extends GCodeLine {
+import GCodeLine from "../gcode-line.abstract";
+
+class Line extends GCodeLine {
 
   constructor() {
     super();
@@ -8,3 +10,5 @@ module.exports = class Line extends GCodeLine {
     console.log("Line")
   }
 };
+
+export default Line;
