@@ -1,3 +1,5 @@
+import { MotorHatOptions, StepperOptions } from "../../interfaces/engine";
+
 module.exports = function MotorHat(options: MotorHatOptions) {
   const steppers: Object[] = [];
 

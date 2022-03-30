@@ -1,4 +1,5 @@
-/*const Engine = require('./src/model/machine/engine.controller');
+
+import Engine from "./src/model/machine/engine.controller";
 
 const motorization = new Engine(
   {
@@ -12,6 +13,7 @@ const motorization = new Engine(
   1000
 );
 
+/*
 
 const values = [
   { x: 1, y: 0 },
@@ -73,4 +75,4 @@ const gcodeString = "G0 G49 G40  G17 G80 G50 G90\n" +
 
 const testPrint = new Print(gcodeString);
 
-testPrint.startPrint();
+testPrint.startPrint(motorization);

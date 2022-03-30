@@ -1,9 +1,10 @@
+import { MotorHatOptions } from "../../interfaces/engine";
+import { Position, SaveInterface } from "../../interfaces/save";
+import Save from "../../utils/save";
+
 const [executor, file, state] = process.argv;
 
 const MotorHat = state !== 'local' ? require('motor-hat') : require('./MotorHatMock');
-
-import Save from "../../utils/save";
-
 const directionTable = { back: -1, fwd: 1 };
 
 class Engine {
@@ -28,7 +29,11 @@ class Engine {
     this.yMotor = this.motors.steppers[1];
     this.config = new Save('machine-config', defaultConfig);
     this.initialize();
-    this.moveToOrigin();
+    //this.moveToOrigin();
+  }
+
+  getPosition(): Position {
+    return this.config.getSave().position;
   }
 
   initialize() {

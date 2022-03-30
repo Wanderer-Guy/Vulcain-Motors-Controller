@@ -1,3 +1,5 @@
+import { Data, SaveInterface } from "../interfaces/save";
+
 const fs = require('fs');
 
 const RESOURCES_FOLDER = './src/resources';

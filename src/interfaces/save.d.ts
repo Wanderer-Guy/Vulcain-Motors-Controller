@@ -18,3 +18,5 @@ interface Position {
   y: number;
   z: number;
 }
+
+export {SaveInterface, Position, Data}
